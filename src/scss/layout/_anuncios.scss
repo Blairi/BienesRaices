@@ -16,6 +16,15 @@
     h3, p {
         margin: 0;
     }
+    .thumb{
+        height: 30rem;
+        width: 100%;
+        img{
+            height: 30rem;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
  
 }
 .precio {
