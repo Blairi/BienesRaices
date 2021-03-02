@@ -83,7 +83,7 @@
 
                             <input type="hidden" name="id" value="<?php echo $propiedad['id']; ?>">
 
-                            <input type="submit" name=""class="boton-rojo-block" value="Eliminar"></input>
+                            <input type="submit" name=""class="boton-rojo-block borrar-registro" value="Eliminar"></input>
                         </form>
         				
         				<a 

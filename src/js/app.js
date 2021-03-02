@@ -6,7 +6,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Funcion para añadir ... en cada descripcion
     descripcion();
+
+    //Alerta antes de eliminar una propiedad
+    borrar();
 });
+
+function borrar(){
+    const btnBorrar = document.querySelectorAll('.borrar-registro');
+    console.log(btnBorrar);
+
+    for(let i = 0; i < btnBorrar.length; i++){
+        btnBorrar[i].addEventListener('click', confirmarBorrado);
+    }
+}
+
+function confirmarBorrado(){
+    let mensaje = '¿Estas seguro que quieres eliminar el registro?';
+    const respuesta = confirm(mensaje);
+
+    if(respuesta){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 function descripcion(){
 
