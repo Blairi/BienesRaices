@@ -6,7 +6,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //Funcion para añadir ... en cada descripcion
     descripcion();
+
+    //Tabs
+    tabs();
 });
+
+function tabs(){
+    tabs = document.querySelectorAll('.tabs-controles button');
+
+    //Iteramos sobre el arreglo tabs para acceder a cada uno de ellos
+    tabs.forEach(boton=>{
+       //Agregamos un eventListener por cada boton
+       boton.addEventListener('click', () =>{
+        //Accedemos al padre de los botones tabs
+        const parent = boton.parentNode;
+        //Accedemos al padre del padre de los botones tabs
+        const grandParent = parent.parentNode;
+        //Accedemos al contenedor de los tabs
+        const contenedorTabs = grandParent.querySelector(".contenedor-tabs");
+
+        //Convertimos el HTMLCollection a un arreglo para poder aplicar metodos de arreglo
+        const childrenList = Array.from(parent.children);
+
+        //Guardamos la posicion de los botones tabs segun su posicion
+        const index = childrenList.indexOf(boton);
+
+        //Editamos los estilos para agregar una animacion
+        contenedorTabs.style.transform = `translate(-${index * 100}%)`;
+        
+        //Removemos la clase activo al presionar otro boton
+        const tabActuales = parent.querySelectorAll('.activo');
+
+        //Eliminamos la clase de todos los botones que la tengan
+        tabActuales.forEach(tabActual => tabActual.classList.remove('activo'));
+
+        //Agregamos clase
+        boton.classList.add('activo');
+
+       }); 
+    });
+}
 
 function descripcion(){
 

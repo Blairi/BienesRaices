@@ -130,7 +130,7 @@
         		<?php echo $error; ?>
         	</div>
     	<?php endforeach; ?>
-        <form action="/admin/propiedades/crear-entrada.php" class="formulario" method="POST" enctype="multipart/form-data">
+        <form action="/admin/blog/crear-entrada.php" class="formulario" method="POST" enctype="multipart/form-data">
         	<fieldset>
         		<legend>General</legend>
 

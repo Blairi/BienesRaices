@@ -16,3 +16,8 @@
 .boton-verde-block{
 	@include boton($verde, block);
 }
+.boton-blanco{
+	@include boton($blanco, block);
+	color: $negro;
+	background: $gris;
+}

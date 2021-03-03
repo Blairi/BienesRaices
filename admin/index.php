@@ -61,95 +61,105 @@
         <?php elseif(intval($resultado) === 4): ?>
             <p class="alerta exito">Entrada Creada Correctamente</p>
         <?php endif; ?>
-        <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
-        <a href="/admin/propiedades/crear-entrada.php" class="boton boton-verde">Nueva Entrada de Blog</a>
+        
 
-        <div id="propiedades">
-            <h3>Propiedades</h3>
-            <table class="propiedades">
-            	<thead>
-            		<tr>
-            			<th>ID</th>
-            			<th>Titulo</th>
-            			<th>Imagen</th>
-            			<th>Precio</th>
-            			<th>Acciones</th>
-            		</tr>
-            	</thead>
-            	<tbody><!-- Mostrar Los resultados -->
-                    <?php while($propiedad = mysqli_fetch_assoc($resultadoConsulta)): ?>
-            		<tr>
-            			<td><?php echo $propiedad['id']; ?></td>
-            			<td><?php echo $propiedad['titulo']; ?></td>
-            			<td> <img src="/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"> </td>
-            			<td>$<?php echo $propiedad['precio']; ?></td>
-            			<td>
-                            <form method="POST" class="w-100">
+        <!-- TABS -->
+        <div class="tabs">
+            <div class="tabs-controles">
+                <button class="boton-blanco activo">Propiedades</button>
+                <button class="boton-blanco">Blog</button>
+            </div>
+            <div class="contenedor-tabs">
+                <div class="contenido-tabs">
+                    <h3>Propiedades</h3>
+                    <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+                    <table class="propiedades">
+                    	<thead>
+                    		<tr>
+                    			<th>ID</th>
+                    			<th>Titulo</th>
+                    			<th>Imagen</th>
+                    			<th>Precio</th>
+                    			<th>Acciones</th>
+                    		</tr>
+                    	</thead>
+                    	<tbody><!-- Mostrar Los resultados -->
+                            <?php while($propiedad = mysqli_fetch_assoc($resultadoConsulta)): ?>
+                    		<tr>
+                    			<td><?php echo $propiedad['id']; ?></td>
+                    			<td><?php echo $propiedad['titulo']; ?></td>
+                    			<td> <img src="/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"> </td>
+                    			<td>$<?php echo $propiedad['precio']; ?></td>
+                    			<td>
+                                    <form method="POST" class="w-100">
 
-                                <input type="hidden" name="id" value="<?php echo $propiedad['id']; ?>">
+                                        <input type="hidden" name="id" value="<?php echo $propiedad['id']; ?>">
 
-                                <input type="submit" name=""class="boton-rojo-block" value="Eliminar"></input>
-                            </form>
-            				
-            				<a 
-                            href="propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Actualizar</a>
-            			</td>
-            		</tr>
-                <?php endwhile; ?>
-            	</tbody>
-            </table>
-        </div>
+                                        <input type="submit" name=""class="boton-rojo-block" value="Eliminar"></input>
+                                    </form>
+                    				
+                    				<a 
+                                    href="propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Actualizar</a>
+                    			</td>
+                    		</tr>
+                        <?php endwhile; ?>
+                    	</tbody>
+                    </table>
+                </div>
 
 
-        <?php
+                <?php
 
-        //Modificamos el query para la otra consulta
-        $query = "SELECT * FROM blog";
+                //Modificamos el query para la otra consulta
+                $query = "SELECT * FROM blog";
 
-        //Consultar db
-        $resultadoConsulta = mysqli_query($db, $query);
+                //Consultar db
+                $resultadoConsulta = mysqli_query($db, $query);
 
-        // echo "<pre>";
-        // var_dump(mysqli_fetch_assoc($resultadoConsulta));
+                // echo "<pre>";
+                // var_dump(mysqli_fetch_assoc($resultadoConsulta));
 
-        // echo "</pre>";
+                // echo "</pre>";
 
-        ?>
+                ?>
 
-        <div id="entradas">
-            <h2>Blog</h2>
-            <table class="entradas">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Titulo</th>
-                        <th>Imagen</th>
-                        <th>Entrada</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody><!-- Mostrar Los resultados -->
-                    <?php while($entrada = mysqli_fetch_assoc($resultadoConsulta)): ?>
-                    <tr>
-                        <td><?php echo $entrada['id']; ?></td>
-                        <td><?php echo $entrada['titulo_entrada']; ?></td>
-                        <td> <img src="/imagenesBlog/<?php echo $entrada['imagen_entrada']; ?>" class="imagen-tabla"> </td>
-                        <td class="descripcion-larga"><?php echo $entrada['entrada']; ?></td>
-                        <td>
-                            <form method="POST" class="w-100">
+                <div class="contenido-tabs">
+                    <h2>Blog</h2>
+                    <a href="/admin/blog/crear-entrada.php" class="boton boton-verde">Nueva Entrada de Blog</a>
+                    <table class="entradas">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Titulo</th>
+                                <th>Imagen</th>
+                                <th>Entrada</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody><!-- Mostrar Los resultados -->
+                            <?php while($entrada = mysqli_fetch_assoc($resultadoConsulta)): ?>
+                            <tr>
+                                <td><?php echo $entrada['id']; ?></td>
+                                <td><?php echo $entrada['titulo_entrada']; ?></td>
+                                <td> <img src="/imagenesBlog/<?php echo $entrada['imagen_entrada']; ?>" class="imagen-tabla"> </td>
+                                <td class="descripcion-larga"><?php echo $entrada['entrada']; ?></td>
+                                <td>
+                                    <form method="POST" class="w-100">
 
-                                <input type="hidden" name="id" value="<?php echo $entrada['id']; ?>">
+                                        <input type="hidden" name="id" value="<?php echo $entrada['id']; ?>">
 
-                                <input type="submit" name=""class="boton-rojo-block" value="Eliminar"></input>
-                            </form>
-                            
-                            <a 
-                            href="propiedades/actualizar.php?id=<?php echo $entrada['id']; ?>" class="boton-amarillo-block">Actualizar</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-                </tbody>
-            </table>
+                                        <input type="submit" name=""class="boton-rojo-block" value="Eliminar"></input>
+                                    </form>
+                                    
+                                    <a 
+                                    href="propiedades/actualizar.php?id=<?php echo $entrada['id']; ?>" class="boton-amarillo-block">Actualizar</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </main>
 
