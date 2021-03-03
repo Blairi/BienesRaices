@@ -60,6 +60,7 @@
             <p class="alerta exito">Anuncio Eliminado Correctamente</p>
         <?php endif; ?>
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+        <a href="/admin/propiedades/crear-entrada.php" class="boton boton-verde">Nueva Entrada de Blog</a>
 
         <table class="propiedades">
         	<thead>
