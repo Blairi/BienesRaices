@@ -63,6 +63,8 @@
 		$wc = mysqli_real_escape_string( $db, $_POST['wc']);
 		$estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento']);
 		$vendedorId = mysqli_real_escape_string( $db, $_POST['vendedor']);
+
+		//Actualizamos fecha
 		$creado = date('Y/m/d');
 
 		//Asignar files hacian una variable
@@ -147,7 +149,7 @@
 
 
 			//Insertar en la base de datos
-			$query = " UPDATE propiedades SET titulo = '${titulo}', precio = ${precio},imagen = '${nombreImagen}',descripcion = '${descripcion}',habitaciones = ${habitaciones},wc = ${wc},estacionamiento = ${estacionamiento}, vendedorId = ${vendedorId} WHERE id = ${id} ";
+			$query = " UPDATE propiedades SET titulo = '${titulo}', precio = ${precio},imagen = '${nombreImagen}',descripcion = '${descripcion}',habitaciones = ${habitaciones},wc = ${wc},estacionamiento = ${estacionamiento},creado = '${creado}', vendedorId = ${vendedorId} WHERE id = ${id} ";
 			// echo $query;
 
 

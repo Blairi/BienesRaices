@@ -60,6 +60,8 @@
             <p class="alerta exito">Anuncio Eliminado Correctamente</p>
         <?php elseif(intval($resultado) === 4): ?>
             <p class="alerta exito">Entrada Creada Correctamente</p>
+        <?php elseif(intval($resultado) === 5): ?>
+            <p class="alerta exito">Entrada Actualizada Correctamente</p>
         <?php endif; ?>
         
 
@@ -152,7 +154,7 @@
                                     </form>
                                     
                                     <a 
-                                    href="propiedades/actualizar.php?id=<?php echo $entrada['id']; ?>" class="boton-amarillo-block">Actualizar</a>
+                                    href="blog/actualizar-entrada.php?id=<?php echo $entrada['id']; ?>" class="boton-amarillo-block">Actualizar</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
