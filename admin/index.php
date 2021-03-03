@@ -49,7 +49,7 @@
 
 ?>
 
-
+    <!-- Crear alerta segun la URL -->
     <main class="contenedor seccion">
         <h1>Administrador de Bienes Raices</h1>
         <?php if(intval($resultado) === 1):?>
@@ -58,6 +58,8 @@
             <p class="alerta exito">Anuncio Actualizado Correctamente</p>
         <?php elseif(intval($resultado) === 3): ?>
             <p class="alerta exito">Anuncio Eliminado Correctamente</p>
+        <?php elseif(intval($resultado) === 4): ?>
+            <p class="alerta exito">Entrada Creada Correctamente</p>
         <?php endif; ?>
         <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
         <a href="/admin/propiedades/crear-entrada.php" class="boton boton-verde">Nueva Entrada de Blog</a>

@@ -1,7 +1,13 @@
 <?php
     
     require '../../includes/funciones.php';
+    $auth = estaAutenticado();
 
+    if(!$auth){
+        header('Location: /');
+    }
+
+    
     //Conectar base de datos
     require '../../includes/config/database.php';
 	$db = conectarDB();
@@ -24,14 +30,21 @@
 
 	//Ejecutar el código despues de que el usuario mande el formulario
 	if($_SERVER['REQUEST_METHOD'] === 'POST'){
-		echo "<pre>";
-		var_dump($_POST);
-		echo "</pre>";
+		// echo "<pre>";
+		// var_dump($_POST);
+		// echo "</pre>";
 
 		//Asignamos a la variable su valor
 		$titulo = mysqli_real_escape_string( $db, $_POST['titulo']);
 		$entrada = mysqli_real_escape_string( $db, $_POST['entrada']);
 		$escritorId = mysqli_real_escape_string( $db, $_POST['escritor']);
+
+		//Asignar imagen hacian una variable em LA SUPER GLOBAL FILES
+		$imagen = $_FILES['imagen'];
+
+		// echo "<pre>";
+		// var_dump($imagen['name']);
+		// echo "</pre>";
 
 		//Asignamos la fecha de creacion del blog
 		$creado = date('Y/m/d');
@@ -41,30 +54,64 @@
 			$errores[] = "Debes añadir un Titulo";
 		}
 
-		if(!$entrada){
-			$errores[] = "Debes añadir una Entrada";
+		if(strlen($entrada) < 50){
+			$errores[] = "Debes añadir una Entrada mayor a los 50 caracteres";
 		}
 		
 		if(!$escritorId){
 			$errores[] = "Debes seleccionar un escritor";
 		}
 
+
+		//Validar imagen
+		if(!$imagen['name'] || $imagen['error']){
+			$errores[] = "No has subido ninguna imagen";
+		}
+
+		//Validar por tamaño (1mb máximo)
+		$medida = 1000 * 1000;
+
+		if($imagen['size'] > $medida){
+			$errores[] = "Selecciona una imagen más ligera";
+		}
+
 		//Revisa si el arreglo de errores esta vacio
 		if(empty($errores)){
+			//Subida de archivos
+
+			//Crear carpeta
+			$carpetaImagenesBlog = '../../imagenesBlog/';
+
+			if(!is_dir($carpetaImagenesBlog)){
+				mkdir($carpetaImagenesBlog);
+			}
+
+			//Generar nombre unico
+			$nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+
+			//subirImagen
+			move_uploaded_file($imagen['tmp_name'], $carpetaImagenesBlog . $nombreImagen);
+
+
 			//Insertar en la base de datos
 
 			//Creamos query
 			$query = "INSERT INTO blog (";
-			$query .= "titulo_entrada, entrada, fecha, escritorId";
+			$query .= "titulo_entrada, entrada, imagen_entrada, fecha, escritorId";
 			$query .= ") VALUES (";
-			$query .= "'$titulo', '$entrada', '$creado', '$escritorId')";
+			$query .= "'$titulo', '$entrada', '$nombreImagen', '$creado', '$escritorId')";
 
-			// echo $query;
-
+			echo $query;
 			//Insertamos el query
 			$resultado = mysqli_query($db, $query);
 
 			echo $resultado;
+
+			if($resultado){
+				//Redireccionar al usuario
+				header('Location: /admin?resultado=4');
+			}
 		}
 	}
 
@@ -99,8 +146,12 @@
         		<label for="escritor">Escritor</label>
         		<select name="escritor" id="escritor">
         			<option value="">--Selecciona--</option>
+        			<!-- Creamos los options con el while -->
+        			<?php while($escritor = mysqli_fetch_assoc($resultado)): ?>
 
-        			<option value="1">Blairi Blitz</option>
+        				<option <?php echo $escritorId === $escritor['id'] ? 'selected' : '';?> value="<?php echo $escritor['id']; ?>"><?php echo $escritor['nombre'] . " " .$escritor['apellido'];  ?></option>
+
+        			<?php endwhile ?>
         		</select>
         	</fieldset>
 
