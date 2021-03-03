@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function descripcion(){
 
     //Seleccionamos los elementos que queremos aplicar el codigo
-    const descripcion = document.querySelectorAll('.descripcion-anuncio');
+    const descripcion = document.querySelectorAll('.descripcion-larga');
     
     //Ponemos el limite de caracteres que deseamos 
     const limite = 220;
