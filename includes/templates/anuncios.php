@@ -46,7 +46,7 @@
         </div> <!--.contenedor-anuncios-->
 
 <?php
-
-    //Cerra la conexion
-    mysqli_close($db);
+    
+    //Aqui cerrariamos la conexion en caso de solo hacer una consulta
+    
 ?>

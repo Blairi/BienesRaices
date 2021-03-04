@@ -8,7 +8,13 @@
 
 .entrada-blog {
     margin-bottom: 2rem;
-
+    .imagen{
+        width: 100%;
+        img{
+            object-fit: cover;
+            height: 100%;
+        }
+    }
     @include tablet {
         display: grid;
         grid-template-columns: 1fr 2fr;

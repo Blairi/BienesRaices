@@ -34,9 +34,11 @@
 ?>
     <main class="contenedor seccion contenido-centrado">
         <h1><?php echo $propiedad['titulo'] ?></h1>
-        <img loading="lazy" src="imagenes/<?php echo $propiedad['imagen'] ?>" alt="<?php echo $propiedad['titulo'] ?>">
+        <div class="thumb">
+            <img loading="lazy" src="imagenes/<?php echo $propiedad['imagen'] ?>" alt="<?php echo $propiedad['titulo'] ?>">
+        </div>
 
-        <div class="resumen-propiedad">
+        <div class="resumen-propiedad aumentar-padding-x">
             <p class="precio"><?php echo $propiedad['precio'] ?></p>
             <ul class="iconos-caracteristicas">
                 <li>
@@ -55,6 +57,7 @@
 
             <p><?php echo $propiedad['descripcion'] ?></p>
         </div>
+        <a href="anuncios.php" class="boton-amarillo-block">Volver a los anuncios</a>
     </main>
 <?php
 

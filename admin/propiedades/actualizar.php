@@ -104,7 +104,7 @@
 		}
 
 		//Validar por tamaño (1mb máximo)
-		$medida = 1000 * 1000;
+		$medida = 1000 * 3000;
 
 		if($imagen['size'] > $medida){
 			$errores[] = "Selecciona una imagen más ligera";

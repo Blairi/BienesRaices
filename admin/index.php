@@ -20,26 +20,67 @@
     //Muestra  mensaje condicional
     $resultado = $_GET['resultado'] ?? null;
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $id = $_POST['id'];
-        $id = filter_var($id, FILTER_VALIDATE_INT);
 
-        if($id){
-            //Eliminar el archivo
-            $query = "SELECT imagen FROM propiedades WHERE id = ${id}";
+    //Eliminar
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        //Propiedades
+        $idPropiedad = $_POST['idPropiedad'];
+        $idPropiedad = filter_var($idPropiedad, FILTER_VALIDATE_INT);
+
+        // Entradas de blog
+        $idBlog = $_POST['idBlog'];
+        $idBlog = filter_var($idBlog, FILTER_VALIDATE_INT);
+
+
+        // echo "<pre>";
+        // var_dump($_POST);
+        // echo "</pre>";
+
+        //Si existe el input con nombre idPropiedad se ejecuta
+        if($idPropiedad){
+            //Eliminar la imagen
+            $query = "SELECT imagen FROM propiedades WHERE id = ${idPropiedad}";
 
             $resultado = mysqli_query($db, $query);
             $propiedad = mysqli_fetch_assoc($resultado);
             
+            // var_dump($query);
+
+            //Eliminamos imagen
             unlink('../imagenes/' . $propiedad['imagen']);
 
             //Elimina la propiedad
-            $query = "DELETE FROM propiedades WHERE id = ${id}";
+            $query = "DELETE FROM propiedades WHERE id = ${idPropiedad}";
 
             $resultado = mysqli_query($db, $query);
 
             if($resultado){
                 header('Location: /admin?resultado=3');
+            }
+        }
+
+        //Si existe el input con nombre idBlog se ejecuta
+        if($idBlog){
+            //Eliminar la imagen
+            $query = "SELECT imagen_entrada FROM blog WHERE id = ${idBlog}";
+
+            $resultado = mysqli_query($db, $query);
+            $entrada = mysqli_fetch_assoc($resultado);
+            
+            // var_dump($query);
+
+            // var_dump($entrada['imagen_entrada']);
+
+            //Eliminar Imagen
+            unlink('../imagenesBlog/' . $entrada['imagen_entrada']);
+
+            //Elimina la propiedad
+            $query = "DELETE FROM blog WHERE id = ${idBlog}";
+
+            $resultado = mysqli_query($db, $query);
+
+            if($resultado){
+                header('Location: /admin?resultado=6');
             }
         }
     }
@@ -62,6 +103,8 @@
             <p class="alerta exito">Entrada Creada Correctamente</p>
         <?php elseif(intval($resultado) === 5): ?>
             <p class="alerta exito">Entrada Actualizada Correctamente</p>
+        <?php elseif(intval($resultado) === 6): ?>
+            <p class="alerta exito">Entrada Eliminada Correctamente</p>
         <?php endif; ?>
         
 
@@ -95,7 +138,7 @@
                     			<td>
                                     <form method="POST" class="w-100">
 
-                                        <input type="hidden" name="id" value="<?php echo $propiedad['id']; ?>">
+                                        <input type="hidden" name="idPropiedad" value="<?php echo $propiedad['id']; ?>">
 
                                         <input type="submit" name=""class="boton-rojo-block" value="Eliminar"></input>
                                     </form>
@@ -148,7 +191,7 @@
                                 <td>
                                     <form method="POST" class="w-100">
 
-                                        <input type="hidden" name="id" value="<?php echo $entrada['id']; ?>">
+                                        <input type="hidden" name="idBlog" value="<?php echo $entrada['id']; ?>">
 
                                         <input type="submit" name=""class="boton-rojo-block" value="Eliminar"></input>
                                     </form>
