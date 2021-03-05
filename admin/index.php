@@ -118,38 +118,35 @@
                 <div class="contenido-tabs">
                     <h3>Propiedades</h3>
                     <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
-                    <table class="propiedades">
-                    	<thead>
-                    		<tr>
-                    			<th>ID</th>
-                    			<th>Titulo</th>
-                    			<th>Imagen</th>
-                    			<th>Precio</th>
-                    			<th>Acciones</th>
-                    		</tr>
-                    	</thead>
-                    	<tbody><!-- Mostrar Los resultados -->
+                    <div class="tabla">
+                    	<div class="tabla-encabezados-propiedades">
+                    		<div class="encabezado-propiedades">ID</div>
+                    		<div class="encabezado-propiedades">Titulo</div>
+                    		<div class="encabezado-propiedades">Imagen</div>
+                    		<div class="encabezado-propiedades">Precio</div>
+                    		<div class="encabezado-propiedades acciones">Acciones</div>
+                    	</div>
+                    	<div class="tabla-cuerpos-propiedades"><!-- Mostrar Los resultados -->
                             <?php while($propiedad = mysqli_fetch_assoc($resultadoConsulta)): ?>
-                    		<tr>
-                    			<td><?php echo $propiedad['id']; ?></td>
-                    			<td><?php echo $propiedad['titulo']; ?></td>
-                    			<td> <img src="/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"> </td>
-                    			<td>$<?php echo $propiedad['precio']; ?></td>
-                    			<td>
+                            <div class="cuerpo-propiedad">    
+                        		<div class="campo-propiedades"><?php echo $propiedad['id']; ?></div>
+                        		<div class="campo-propiedades"><?php echo $propiedad['titulo']; ?></div>
+                        		<div class="campo-propiedades"> <img src="/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"> </div>
+                        		<div class="campo-propiedades">$<?php echo $propiedad['precio']; ?></div>
+                        		<div class="campo-propiedades-acciones">
                                     <form method="POST" class="w-100">
 
                                         <input type="hidden" name="idPropiedad" value="<?php echo $propiedad['id']; ?>">
 
                                         <input type="submit" name=""class="boton-rojo-block" value="Eliminar"></input>
                                     </form>
-                    				
-                    				<a 
-                                    href="propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Actualizar</a>
-                    			</td>
-                    		</tr>
+                        				
+                        			<a href="propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block w-100">Actualizar</a>
+                        		</div>
+                            </div>
                         <?php endwhile; ?>
-                    	</tbody>
-                    </table>
+                    	</div>
+                    </div>
                 </div>
 
 
