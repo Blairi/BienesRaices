@@ -168,24 +168,22 @@
                 <div class="contenido-tabs">
                     <h2>Blog</h2>
                     <a href="/admin/blog/crear-entrada.php" class="boton boton-verde">Nueva Entrada de Blog</a>
-                    <table class="entradas">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Titulo</th>
-                                <th>Imagen</th>
-                                <th>Entrada</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody><!-- Mostrar Los resultados -->
+                    <div class="tabla">
+                        <div class="tabla-encabezados-entradas">
+                            <div>ID</div>
+                            <div>Titulo</div>
+                            <div>Imagen</div>
+                            <div>Entrada</div>
+                            <div class="acciones">Acciones</div>
+                        </div>
+                        <div class="tabla-cuerpos-entradas"><!-- Mostrar Los resultados -->
                             <?php while($entrada = mysqli_fetch_assoc($resultadoConsulta)): ?>
-                            <tr>
-                                <td><?php echo $entrada['id']; ?></td>
-                                <td><?php echo $entrada['titulo_entrada']; ?></td>
-                                <td> <img src="/imagenesBlog/<?php echo $entrada['imagen_entrada']; ?>" class="imagen-tabla"> </td>
-                                <td class="descripcion-larga"><?php echo $entrada['entrada']; ?></td>
-                                <td>
+                            <div class="cuerpo-entrada">
+                                <div class="campo-entrada"><?php echo $entrada['id']; ?></div class="">
+                                <div class="campo-entrada"><?php echo $entrada['titulo_entrada']; ?></div class="">
+                                <div class="campo-entrada"> <img src="/imagenesBlog/<?php echo $entrada['imagen_entrada']; ?>" class="imagen-tabla"> </div>
+                                <div class="descripcion-larga"><?php echo $entrada['entrada']; ?></div>
+                                <div class="campo-entradas-acciones">
                                     <form method="POST" class="w-100">
 
                                         <input type="hidden" name="idBlog" value="<?php echo $entrada['id']; ?>">
@@ -195,11 +193,11 @@
                                     
                                     <a 
                                     href="blog/actualizar-entrada.php?id=<?php echo $entrada['id']; ?>" class="boton-amarillo-block">Actualizar</a>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         <?php endwhile; ?>
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

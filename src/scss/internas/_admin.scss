@@ -97,4 +97,60 @@
 			}
 		}
 	}
+
+
+	.tabla-encabezados-entradas,
+	.cuerpo-entrada{
+		@include grid(5, 0);
+	}
+	.tabla-encabezados-entradas{
+		div{
+			display: flex;
+			padding: 3rem 0;
+			justify-content: center;
+			font-size: 2rem;
+			background: $verde;
+		}
+	}
+	.cuerpo-entrada{
+		padding: 1rem 0;
+		div{
+			display: flex;
+			flex-direction: column;
+			background: $grisOscuro;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+	.tabla-encabezados-entradas,
+	.cuerpo-entrada{
+		@include grid(4, 0);
+		.campo-entradas-acciones{
+			grid-column: 1/5;
+			.boton-amarillo-block{
+				margin-top: .5rem;
+				width: 100%;
+			}
+		}
+		.acciones{
+			visibility: hidden;
+			position: absolute;
+		}
+	}
+	@include tablet{
+		.tabla-encabezados-entradas,
+		.cuerpo-entrada{
+			@include grid(5, 0);
+			.campo-entradas-acciones{
+				grid-column: 5/6;
+				.boton-amarillo-block{
+					margin-top: 2rem;
+				}
+			}
+			.acciones{
+				visibility: visible;
+				position: unset;
+			}
+		}
+	}	
 }
