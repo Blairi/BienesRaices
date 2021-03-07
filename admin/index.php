@@ -173,7 +173,7 @@
                             <div>ID</div>
                             <div>Titulo</div>
                             <div>Imagen</div>
-                            <div>Entrada</div>
+                            <div>EscritorID</div>
                             <div class="acciones">Acciones</div>
                         </div>
                         <div class="tabla-cuerpos-entradas"><!-- Mostrar Los resultados -->
@@ -182,7 +182,10 @@
                                 <div class="campo-entrada"><?php echo $entrada['id']; ?></div class="">
                                 <div class="campo-entrada"><?php echo $entrada['titulo_entrada']; ?></div class="">
                                 <div class="campo-entrada"> <img src="/imagenesBlog/<?php echo $entrada['imagen_entrada']; ?>" class="imagen-tabla"> </div>
-                                <div class="descripcion-larga"><?php echo $entrada['entrada']; ?></div>
+
+
+
+                                <div class="campo-entrada"><?php echo $entrada['escritorId']; ?></div>
                                 <div class="campo-entradas-acciones">
                                     <form method="POST" class="w-100">
 
